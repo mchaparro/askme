@@ -8,18 +8,51 @@
 
   <style>
     #map{
-      height:400px;
+      height:350px;
       width:100%;
     }
+    
+    .blur{
+  -webkit-filter: blur(5px); /* Chrome, Safari, Opera */
+  filter: blur(5px);
+}
     </style>
-  <h1>Welcome to Ask Me!</h1>
-  <h5>Questions where asked in the following locations</h5>
-  <div id="map"></div>
+    <div class="text-center col-lg-12 container">
+    
+	  <h1 class="col ">Welcome to Ask Me!</h1>
+	  </br>
+	  	   <div id="" class="row" >
+	   <div id="" class="col jumbotron" >
+	   		<h3>Ask a Question!</h2>
+	   		
+	   		<!--  <h11>How can the Community help you today?</h11>
+	   		-->
+	   		<div class="form-group col-lg-12">
+		    <textarea placeholder="How can I..." style="font-size:18px; resize: none; text-align:center;"class="form-control" id="q" rows="4"></textarea>
+		</br>
+		 <button type="button" class="btn btn-primary btn-lg">Submit Question</button>
+		  </div>
+	   </div>
+	   
+	  <div id="" class="col-9" >
+	  		 <h5>There are pending questions in the following locations</h5>
+	  		<div id="map"></div>	
+	  			
+	  		
+	  </div>
+	  
+	  </div>
+  
+  </div>
+  
   <script>
+  
+
+  
     function initMap(){
       // Map options
       var options = {
-        zoom:17,
+        zoom:16.5,
         center:{lat:59.397072,lng:24.662570}
       }
 
@@ -29,7 +62,7 @@
       // Listen for click on map
       google.maps.event.addListener(map, 'click', function(event){
         // Add marker
-        addMarker({coords:event.latLng});
+     //   addMarker({coords:event.latLng});
       });
 
       /*
@@ -93,6 +126,17 @@
             // they must have double clicked, so do nothing
             return;
         }
+        
+        var cityCircle = new google.maps.Circle({
+            strokeColor: '#4CAF50',
+            strokeOpacity: 0.7,
+            strokeWeight: 2,
+            fillColor: '#4CAF50',
+            fillOpacity: 0.1,
+            map: map,
+            center: {lat:59.397072,lng:24.662570},
+            radius: 120
+          });
         	
       }
     }
