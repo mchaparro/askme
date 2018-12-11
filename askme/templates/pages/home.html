@@ -12,7 +12,8 @@
       width:100%;
     }
     </style>
-  <h1>My Google Map</h1>
+  <h1>Welcome to Ask Me!</h1>
+  <h5>Questions where asked in the following locations</h5>
   <div id="map"></div>
   <script>
     function initMap(){
@@ -54,13 +55,6 @@
           coords:{lat:59.397072,lng:24.662570},
           iconImage:'https://cdn1.iconfinder.com/data/icons/iconbeast-lite/30/question.png',
           content:'<div>3 Questions pending to be answered</div>'
-        },
-        {
-          coords:{lat:42.8584,lng:-70.9300},
-          content:'<h1>Amesbury MA</h1>'
-        },
-        {
-          coords:{lat:42.7762,lng:-71.0773}
         }
       ];
 
@@ -99,10 +93,11 @@
             // they must have double clicked, so do nothing
             return;
         }
-        
+        	
       }
     }
   </script>
+
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBteeZDjRtOcrEab02Wa-FHUFX_InsQibE&callback=initMap">
     </script>
