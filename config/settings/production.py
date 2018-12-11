@@ -17,7 +17,10 @@ DATABASES['default']['CONN_MAX_AGE'] = env.int('CONN_MAX_AGE', default=60)  # no
 # CACHES
 # ------------------------------------------------------------------------------
 CACHES = {
-    {'default': {'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'}}
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
 }
 
 # SECURITY
