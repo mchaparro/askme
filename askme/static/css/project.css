@@ -12,15 +12,3 @@
   border-color: #eed3d7;
 }
 
-body{
-	
-
-	color:white !important;	
-	background: black url(static/images/home-wave.svg) no-repeat scroll center center / cover;
-}
-.jumbotron{
-	color:black;
-}
-a{
-	color:white;
-}
