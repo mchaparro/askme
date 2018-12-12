@@ -145,6 +145,26 @@
         	
       }
     }
+    
+    $(document).ready(function() {
+  	  
+  	  
+  	  $("#on").click(function(){
+  		  $.post( "https://asper.serveo.net/led/green/", { state: "1" })
+  		  .done(function( data ) {
+  		    console.log(data);
+  		  });
+  	  })
+  	  
+  	  $("#off").click(function(){
+  		  $.post( "https://asper.serveo.net/led/green/", { state: "0" })
+  		  .done(function( data ) {
+  		    console.log(data);
+  		  });
+  	  })
+  	
+  	  
+  	});
   </script>
 
   <script async defer
