@@ -148,7 +148,10 @@
     }
     
     $(document).ready(function() {
-      var serverURL = "https://pauper.serveo.net"  	  
+      var serverURL = "https://asper.serveo.net"
+      
+      console.log("{{ count }}");
+      
   	  $("#on").click(function(){
   		  $.get( serverURL+"/on",)
   		  .done(function( data ) {
@@ -157,11 +160,22 @@
   	  })
   	  
   	  $("#submit").click(function(){
-  		var randomnumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
-  		  $.get( serverURL+"/?display="+randomnumber,)
-  		  .done(function( data ) {
-  		    console.log(data);
-  		  });
+  		  
+  		 $.get("/new_question/?question=testing")
+ 		  .done(function( data ) {
+ 		    console.log(data);
+ 		    
+	 		   $.get( serverURL+"/?display="+data['count'],)
+	   		  .done(function( data ) {
+	   		    console.log(data);
+	   		  });
+ 		  });
+  		  
+  		//var randomnumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+  		 // $.get( serverURL+"/?display="+{{ count }},)
+  		  //.done(function( data ) {
+  		   // console.log(data);
+  		  //});
   	  })
   	  
   	  
