@@ -16,16 +16,17 @@ class User(AbstractUser):
 
 
 class Question(models.Model):
-    question = models.CharField(max_length=50, unique=True, null=False, blank=False)
+    question = models.CharField(max_length=500, null=False, blank=False)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey('User',blank=True,null=True, related_name='questions', on_delete=models.CASCADE)
-    latitude = models.CharField(max_length=50, unique=True, null=False, blank=False)
-    longitud = models.CharField(max_length=50, unique=True, null=False, blank=False)
+    lat = models.CharField(max_length=50, unique=True, null=False, blank=False)
+    long = models.CharField(max_length=50, unique=True, null=False, blank=False)
     pending = models.BooleanField (default=True)  
     
 class Answer(models.Model):
-    question = models.CharField(max_length=50, unique=True, null=False, blank=False)
+    question = models.ForeignKey('Question', related_name='answers', on_delete=models.CASCADE)
+    answer = models.CharField(max_length=500, null=False, blank=False) 
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey('User',blank=True,null=True, related_name='answers', on_delete=models.CASCADE)    
