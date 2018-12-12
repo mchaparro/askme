@@ -4,66 +4,49 @@ ssh raspberrypi.mshome.net
 username: pi
 password: raspberry
 
-import RPi.GPIO as GPIO
-import time
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(14,GPIO.OUT)
-GPIO.setup(15,GPIO.OUT)
-GPIO.setup(18,GPIO.OUT)
-GPIO.setup(23,GPIO.OUT)
-GPIO.setup(24,GPIO.OUT)
-GPIO.setup(25,GPIO.OUT)
-GPIO.setup(8,GPIO.OUT)
-GPIO.setup(7,GPIO.OUT)
-GPIO.setup(12,GPIO.OUT)
-GPIO.setup(16,GPIO.OUT)
-GPIO.setup(20,GPIO.OUT)
-GPIO.setup(21,GPIO.OUT)
-GPIO.setup(2,GPIO.OUT)
-GPIO.setup(3,GPIO.OUT)
-GPIO.setup(4,GPIO.OUT)
-GPIO.setup(17,GPIO.OUT)
-GPIO.setup(27,GPIO.OUT)
-GPIO.setup(22,GPIO.OUT)
-GPIO.setup(10,GPIO.OUT)
-GPIO.setup(9,GPIO.OUT)
-GPIO.setup(11,GPIO.OUT)
-GPIO.setup(5,GPIO.OUT)
-GPIO.setup(6,GPIO.OUT)
-GPIO.setup(13,GPIO.OUT)
-GPIO.setup(19,GPIO.OUT)
-GPIO.setup(26,GPIO.OUT)
-print "LED on"
-GPIO.output(18,GPIO.HIGH)
+https://cookiecutter-django.readthedocs.io/en/latest/deployment-on-heroku.html
 
-GPIO.setup(14,GPIO.HIGH)
-GPIO.setup(15,GPIO.HIGH)
-GPIO.setup(18,GPIO.HIGH)
-GPIO.setup(23,GPIO.HIGH)
-GPIO.setup(24,GPIO.HIGH)
-GPIO.setup(25,GPIO.HIGH)
-GPIO.setup(8,GPIO.HIGH)
-GPIO.setup(7,GPIO.HIGH)
-GPIO.setup(12,GPIO.HIGH)
-GPIO.setup(16,GPIO.HIGH)
-GPIO.setup(20,GPIO.HIGH)
-GPIO.setup(21,GPIO.HIGH)
-GPIO.setup(2,GPIO.HIGH)
-GPIO.setup(3,GPIO.HIGH)
-GPIO.setup(4,GPIO.HIGH)
-GPIO.setup(17,GPIO.HIGH)
-GPIO.setup(27,GPIO.HIGH)
-GPIO.setup(22,GPIO.HIGH)
-GPIO.setup(10,GPIO.HIGH)
-GPIO.setup(9,GPIO.HIGH)
-GPIO.setup(11,GPIO.HIGH)
-GPIO.setup(5,GPIO.HIGH)
-GPIO.setup(6,GPIO.HIGH)
-GPIO.setup(13,GPIO.HIGH)
-GPIO.setup(19,GPIO.HIGH)
-GPIO.setup(26,GPIO.HIGH)
+RESET HEROKU DATABASE
+heroku restart && heroku pg:reset DATABASE --confirm APP-NAME
 
-time.sleep(1)
-print "LED off"
-GPIO.output(18,GPIO.LOW)
+google apps key
+AIzaSyBteeZDjRtOcrEab02Wa-FHUFX_InsQibE
+
+
+FLASK API led raspberry 
+https://docs.dataplicity.com/docs/control-gpios-using-rest-api
+
+RUN NGROK
+ sudo -E flask run --host=0.0.0.0 --port=80
+./ngrok http 80
+http://d00c7686.ngrok.io
+
+
+$.post( "http://4e6f0723.ngrok.io/led/green/?state=0", {'state':0}).done(function( data ) {
+ console.log(data);
+}));
+
+$.post( "http://4e6f0723.ngrok.io/led/green/?state=0", { state: "0" })
+  .done(function( data ) {
+    console.log(data);
+  });
+
+
+ $.ajax({
+            url: "https://cors.io/?http://4e6f0723.ngrok.io/led/green/?state=0",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify({}),
+            dataType: "json",
+            success: function (response) {
+                var resp = JSON.parse(response)
+                alert(resp.status);
+            },
+            error: function (xhr, status) {
+                alert("error");
+            }
+        });
+
+
+
+heroku run python manage.py collectstatic --no-input

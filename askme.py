@@ -3,14 +3,16 @@
 from flask import request
 from flask_api import FlaskAPI
 import RPi.GPIO as GPIO
+from flask_cors import CORS
 
 LEDS = {"green": 16, "red": 18}
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(LEDS["green"], GPIO.OUT)
 GPIO.setup(LEDS["red"], GPIO.OUT)
 
-app = FlaskAPI(__name__)
 
+app = FlaskAPI(__name__)
+CORS(app)
 @app.route('/', methods=["GET"])
 def api_root():
     return {
