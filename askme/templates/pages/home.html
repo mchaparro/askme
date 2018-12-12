@@ -30,11 +30,12 @@
 	   		<div class="form-group ">
 		    <textarea placeholder="How can I..." style="margin-bottom:15px; font-size:16px; resize: none; text-align:center;"class="form-control" id="q" rows="4"></textarea>
 		</br>
-		 <button type="button" class="btn btn-primary btn-lg">Submit Question</button>
-		 
-		  <button type="button" id="on" class="btn btn-primary btn-lg">Prender</button>
+		 <button id="submit" type="button" class="btn btn-primary btn-lg">Submit Question</button>
+		 </br>
+		 </br>
+		  <button type="button" id="on" class="btn btn-primary btn-xs">Prender</button>
 		  
-		   <button type="button" id="off" class="btn btn-primary btn-lg">Apagar</button>
+		   <button type="button" id="off" class="btn btn-primary btn-xs">Apagar</button>
 		  </div>
 	   </div>
 	   
@@ -150,14 +151,23 @@
   	  
   	  
   	  $("#on").click(function(){
-  		  $.post( "https://asper.serveo.net/led/green/", { state: "1" })
+  		  $.get( "https://asper.serveo.net/on",)
   		  .done(function( data ) {
   		    console.log(data);
   		  });
   	  })
   	  
+  	  $("#submit").click(function(){
+  		var randomnumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+  		  $.get( "https://asper.serveo.net/?display="+randomnumber,)
+  		  .done(function( data ) {
+  		    console.log(data);
+  		  });
+  	  })
+  	  
+  	  
   	  $("#off").click(function(){
-  		  $.post( "https://asper.serveo.net/led/green/", { state: "0" })
+  		  $.get( "https://asper.serveo.net/off")
   		  .done(function( data ) {
   		    console.log(data);
   		  });
