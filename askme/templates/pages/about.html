@@ -1,2 +1,75 @@
 {% extends "base.html" %}
 
+{% block content %}
+
+<div class="text-center container">
+{% if questions %}
+<h2 style="margin-bottom:50px; margin-top:20px;">Questions waiting to be answered</h1>
+{% else %}
+<h2 style="margin-bottom:50px; margin-top:20px;">Currently, there are no questions waiting to be answered :)</h1>
+{% endif %}
+{% for question in questions %}
+
+<div id="{{ question.id }}" class="row" style="margin-top:10px; border:3px solid gray; border-radius:13px; min-height:40px; padding:10px; font-size:18px;">
+
+
+<div class="col-lg-1 col-xs-12 text-center" style="float-left; font-size:14px; font-weight:bold;">{{ question.id }}</div>
+	<div class="col-lg-4 col-xs-12 text-center">
+	
+	<b>{{ question.question|truncatechars:70  }}</b></div>
+	<div class="col-lg-3 col-xs-12 text-center" style=" font-size:15px;">
+	{{ question.created_on }}
+	
+	{% if question.created_by %}
+	<div>Author: {{ question.created_by }}</div>
+	{% else %}
+	<div>Author: Anonymous</div>
+	{% endif %}
+	</div>
+	<div data-id="{{ question.id }}" class="remove col-lg-4 col-xs-12 text-center"><button style=" "type="button" class="btn btn-success">Provide Answer</button></div>
+	
+</div>
+
+{% endfor %}
+
+</div>
+
+
+
+<script>
+$(document).ready(function(){
+	
+	$(".remove").click(function(){
+		question_id = $(this).attr("data-id");
+		
+		console.log(question_id);
+		
+		
+	
+		  		question = $("#question").val();
+		  		 $.get("/provide_answer/?question="+question_id)
+		 		  .done(function( data ) {
+		 		    console.log(data);
+		 		   $(".counter").text(data['count']);
+		 		   $("#"+question_id).fadeOut(300, function(){ $(this).remove();});
+			 		   $.get( serverURL+"/?display="+data['count'],)
+			   		  .done(function( data ) {
+			   			  
+			   		    console.log(data);
+			   		  });
+		 		  });
+		  		  
+		  		//var randomnumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+		  		 // $.get( serverURL+"/?display="+{{ count }},)
+		  		  //.done(function( data ) {
+		  		   // console.log(data);
+		  		  //});
+		  	
+		
+	});
+	
+});
+
+</script>
+
+{% endblock %}

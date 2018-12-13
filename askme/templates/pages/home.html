@@ -28,14 +28,10 @@
 	   		<!--  <h11>How can the Community help you today?</h11>
 	   		-->
 	   		<div class="form-group ">
-		    <textarea placeholder="How can I..." style="margin-bottom:15px; font-size:16px; resize: none; text-align:center;"class="form-control" id="q" rows="4"></textarea>
+		    <textarea maxlength="300" id="question" placeholder="How can I..." style="margin-bottom:15px; font-size:16px; resize: none; text-align:center;"class="form-control" id="q" rows="4"></textarea>
 		</br>
 		 <button id="submit" type="button" class="btn btn-primary btn-lg">Submit Question</button>
-		 </br>
-		 </br>
-		  <button type="button" id="on" class="btn btn-primary btn-xs">Prender</button>
-		  
-		   <button type="button" id="off" class="btn btn-primary btn-xs">Apagar</button>
+		
 		  </div>
 	   </div>
 	   
@@ -47,6 +43,26 @@
 	  </div>
 	  
 	  </div>
+  
+  
+  
+  <div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h7 class="modal-title">Ask me!</h5>
+        
+      </div>
+      <div class="modal-body">
+       <h5> <p>Your question has been posted!</p></h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
   
   </div>
   
@@ -93,7 +109,8 @@
         {
           coords:{lat:59.397072,lng:24.662570},
           iconImage:'https://cdn1.iconfinder.com/data/icons/iconbeast-lite/30/question.png',
-          content:'<div>3 Questions pending to be answered</div>'
+          content:'<div><a href="/pending_questions/"><span class="counter">{{count}}</span> Question(s) pending to be answered</a></div>'
+        
         }
       ];
 
@@ -148,7 +165,7 @@
     }
     
     $(document).ready(function() {
-      var serverURL = "https://asper.serveo.net"
+     
       
       console.log("{{ count }}");
       
@@ -160,17 +177,26 @@
   	  })
   	  
   	  $("#submit").click(function(){
-  		  
-  		 $.get("/new_question/?question=testing")
+  		question = $("#question").val();
+  		
+  		if (question.trim() != ""){
+  			
+  		
+  		 $.get("/new_question/?question="+question)
  		  .done(function( data ) {
  		    console.log(data);
- 		    
+ 		   $(".modal").modal('show');
+ 		   $("#question").val("");
+ 		   $(".counter").text(data['count']);
+ 		   
+ 		   
 	 		   $.get( serverURL+"/?display="+data['count'],)
 	   		  .done(function( data ) {
 	   		    console.log(data);
 	   		  });
  		  });
   		  
+  		}
   		//var randomnumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
   		 // $.get( serverURL+"/?display="+{{ count }},)
   		  //.done(function( data ) {

@@ -24,7 +24,7 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 
-
+<script>serverURL = "https://asper.serveo.net"</script>
 
     {% block css %}
     
@@ -55,12 +55,12 @@
               <a class="nav-link" href="{% url 'home' %}">Ask a Question<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">Pending Questions</a>
+              <a class="nav-link" href="{% url 'pending_questions' %}"><span class="counter">{{count}}</span> Pending Question(s)</a>
             </li>
             {% if request.user.is_authenticated %}
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
+                <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %} {{ request.user }}</a>
               </li>
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}
@@ -107,7 +107,7 @@
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2018 Copyright:
       <a  target="_blank" href="https://ois.ttu.ee/portal/page?_pageid=37,674581&_dad=portal&_schema=PORTAL&p_action=view&p_id=117191&p_session_id=71645268&p_public=1&p_mode=1&keel=ET">SE IAS0320 Course Tallinn University of Technology</a>
-        <div style="font-weight:bold;">TEAM 7</div>
+        <div style="font-weight:bold; cursor:pointer;"><span id="off">TEAM</span> <span id="on">7</span></div>
     </div>
     <!-- Copyright -->
 

@@ -14,9 +14,29 @@ def home(request):
     data = {"count": count}
     return render(request,'pages/home.html',data )
 
+
+
+def pending_questions(request):
+    questions = Question.objects.filter(pending=True).order_by("-created_on")
+    data = {"questions": questions,
+            "count" : questions.count()}
+    return render(request,'pages/about.html',data )
+
 def create_question(request):
     question = request.GET.get('question','blank question')
-    Question.objects.create(question=question)
+    if request.user.is_authenticated:
+         Question.objects.create(question=question, created_by = request.user)
+    else:
+        Question.objects.create(question=question)
+    count = Question.objects.filter(pending=True).count()
+    data = {"count": count}
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+def provide_answer(request):
+    question = request.GET.get('question',None)
+    q = Question.objects.get(id=question)
+    q.pending=False
+    q.save()
     count = Question.objects.filter(pending=True).count()
     data = {"count": count}
     return HttpResponse(json.dumps(data), content_type='application/json')
